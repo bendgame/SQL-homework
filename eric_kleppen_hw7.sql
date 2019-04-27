@@ -3,19 +3,19 @@ use sakila;
 
 -- 1a
 select first_name
-		,last_name
+	,last_name
 from actor;
 
 -- 1b
 select first_name
-		,last_name
-		,upper(concat(first_name,' ', last_name)) as Actor_Name
+	,last_name
+	,upper(concat(first_name,' ', last_name)) as Actor_Name
 from actor;
  
  -- 2a
  select first_name
-		,last_name
-		,actor_ID 
+	,last_name
+	,actor_ID 
 from actor 
 where first_name = 'Joe';
 
@@ -46,13 +46,13 @@ drop description;
 
 -- 4a
 select last_name
-		, count(last_name) as record_count
+	, count(last_name) as record_count
 from actor
 group by last_name;
 
 -- 4b
 select last_name
-		, count(last_name) as record_count
+	, count(last_name) as record_count
 from actor
 group by last_name
 having record_count >= 2; -- 2 or 3?
@@ -70,15 +70,15 @@ SHOW CREATE TABLE address;
 
 -- 6a
 select first_name
-		,last_name
-		,address
+	,last_name
+	,address
 from staff as s
 inner join address as a on a.address_id = s.address_id;
 
 -- 6b select * from payment
 select first_name
-		,last_name
-		,sum(amount) as Total_amount
+	,last_name
+	,sum(amount) as Total_amount
 from staff  s
 join payment p on p.staff_id = s.staff_id
 where 1=1 
@@ -87,7 +87,7 @@ group by first_name, last_name;
 
 -- 6c
 select title
-		,count(actor_ID) as actor_count
+	,count(actor_ID) as actor_count
 from film f
 inner join film_actor fa on fa.film_id = f.film_id
 group by title;
@@ -101,8 +101,8 @@ group by title;
 
 -- 6e
 select first_name
-		,last_name
-		,sum(amount) as Total_Amount_Paid
+	,last_name
+	,sum(amount) as Total_Amount_Paid
 from customer c 
 inner join payment p on p.customer_id = c.customer_id
 group by first_name, last_name
@@ -129,8 +129,8 @@ WHERE a.actor_id IN (
 
  -- 7c
 select first_name
-		, last_name
-		, email
+	, last_name
+	, email
 from customer c
 inner join address a on a.address_id = c.address_id
 inner join city ci on ci.city_ID = a.city_id
@@ -146,7 +146,7 @@ where c.name = 'family';
 
 -- 7e
 select count(rental_id) as rental_count
-		, title
+	, title
 from rental r
 inner join inventory i on i.inventory_id = r.inventory_id
 inner join film f on f.film_id = i.film_id
@@ -155,7 +155,7 @@ order by rental_count desc;
 
 -- 7f
 select s.store_id
-		,sum(p.amount) as Business_in_dollars 
+	,sum(p.amount) as Business_in_dollars 
 from store s
 inner join customer c on c.store_ID = s.store_ID
 inner join payment p on p.customer_id = c.customer_id
@@ -163,8 +163,8 @@ group by s.store_id;
  
  -- 7g
  select s.store_id 
-		,c.city
-		,co.country
+	,c.city
+	,co.country
  from store s
  inner join address a on a.address_id = s.address_id
  inner join city c on c.city_id = a.city_id
@@ -172,7 +172,7 @@ group by s.store_id;
  
 -- 7h
 select c.name as category_name
-		,sum(amount) as Gross_revenue
+	,sum(amount) as Gross_revenue
 from payment p
 inner join rental r on  r.rental_id = p.rental_id
 inner join inventory i on i.inventory_id = r.inventory_id
